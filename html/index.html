@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5MG Fish</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="fishing-minigame" style="display: none;">
+        <div class="minigame-container">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <i class="fas fa-fish fish-icon-header"></i>
+                        <h2 id="minigame-title">Fishing</h2>
+                    </div>
+                    <div class="timer-container">
+                        <div class="timer-bar">
+                            <div class="timer-fill" id="timer-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <p id="minigame-desc" class="text-center mb-4">Keep the tension balanced to catch the fish!</p>
+                    
+                    <div class="fishing-scene">
+                        <div class="water-background">
+                            <div class="wave wave1"></div>
+                            <div class="wave wave2"></div>
+                            <div class="wave wave3"></div>
+                            <div class="wave wave4"></div>
+                        </div>
+                        
+                        <div class="rope-container">
+                            <div class="fishing-rope" id="fishing-rope">
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                                <div class="rope-segment"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="fish-container">
+                            <div class="fish" id="fish">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="fishing-line"></div>
+                        <div class="fishing-hook" id="hook"></div>
+                        <div class="target-zone">
+                            <span class="target-label">SAFE ZONE</span>
+                        </div>
+                        
+                        <div class="danger-zone danger-zone-top">
+                            <span class="danger-label">DANGER</span>
+                        </div>
+                        
+                        <div class="danger-zone danger-zone-bottom">
+                            <span class="danger-label">DANGER</span>
+                        </div>
+                        
+                        <div class="bubbles">
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tension-meter mt-4">
+                        <div class="tension-label">
+                            <i class="fas fa-tachometer-alt me-2"></i>Line Tension
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" id="tension-fill" role="progressbar" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls mt-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <button id="reel-btn" class="btn btn-primary w-100">
+                                    <i class="fas fa-sync-alt me-2"></i>REEL IN
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button id="give-slack-btn" class="btn btn-danger w-100">
+                                    <i class="fas fa-arrow-down me-2"></i>GIVE SLACK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-container mt-3">
+                        <div class="status-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="status-message">
+                            <p id="status-message" class="text-center">Ready to fish!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="fish-market" style="display: none;">
+        <div class="market-container">
+            <div class="market-header">
+                <div class="market-logo">
+                    <i class="fas fa-fish"></i>
+                    <span>FISH MARKET</span>
+                </div>
+                <div class="market-actions">
+                    <div class="market-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="market-search" placeholder="Search fish...">
+                    </div>
+                    <button id="close-market" class="market-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="market-content">
+                <div class="market-sidebar">
+                    <div class="market-user">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-info">
+                            <h3>Fisherman</h3>
+                            <p>Professional</p>
+                        </div>
+                    </div>
+                    
+                    <div class="market-categories">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li class="active" data-category="all">
+                                <i class="fas fa-border-all"></i>
+                                <span>All Fish</span>
+                            </li>
+                            <li data-category="common">
+                                <i class="fas fa-fish"></i>
+                                <span>Common Fish</span>
+                            </li>
+                            <li data-category="rare">
+                                <i class="fas fa-fish"></i>
+                                <span>Rare Fish</span>
+                            </li>
+                            <li data-category="exotic">
+                                <i class="fas fa-fish"></i>
+                                <span>Exotic Fish</span>
+                            </li>
+                            <li data-category="legendary">
+                                <i class="fas fa-fish"></i>
+                                <span>Legendary Fish</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="market-stats">
+                        <h4>Market Stats</h4>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="total-value">$0</span>
+                                <span class="stat-label">Total Value</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="total-items">0</span>
+                                <span class="stat-label">Total Fish</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="market-main">
+                    <div class="market-tabs">
+                        <button class="tab-btn active" data-tab="inventory">Inventory</button>
+                        <button class="tab-btn" data-tab="market">Market Prices</button>
+                        <button class="tab-btn" data-tab="history">Transaction History</button>
+                    </div>
+                    
+                    <div class="market-tab-content">
+                        <div class="tab-pane active" id="inventory-tab">
+                            <div class="market-filters">
+                                <div class="filter-group">
+                                    <label>Sort by:</label>
+                                    <select id="sort-select">
+                                        <option value="name">Name</option>
+                                        <option value="price">Price</option>
+                                        <option value="quantity">Quantity</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label>View:</label>
+                                    <div class="view-options">
+                                        <button class="view-btn active" data-view="grid">
+                                            <i class="fas fa-th"></i>
+                                        </button>
+                                        <button class="view-btn" data-view="list">
+                                            <i class="fas fa-list"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="inventory-grid" id="inventory-container">
+                            </div>
+                        </div>
+                        
+
+                        <div class="tab-pane" id="market-tab">
+                            <div class="price-chart-container">
+                                <canvas id="price-chart"></canvas>
+                            </div>
+                            <div class="market-table-container">
+                                <table class="market-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Fish Type</th>
+                                            <th>Status</th>
+                                            <th>Rarity</th>
+                                            <th>Quantity</th>
+                                            <th>Price per Unit</th>
+                                            <th>Timer</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="market-prices">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="history-tab">
+                            <div class="history-list" id="transaction-history">
+                                <div class="empty-state">
+                                    <i class="fas fa-history"></i>
+                                    <p>No transaction history available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sell-modal" class="market-modal" style="display: none;">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="sell-title">Sell Fish</h3>
+                    <button id="close-modal" class="modal-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="item-preview">
+                        <div class="item-image" id="sell-item-image">
+                            <i class="fas fa-fish"></i>
+</div>
+<div class="item-details">
+    <h4 id="sell-item-name">Fish</h4>
+    <p id="sell-item-desc">Fresh caught fish from the ocean.</p>
+    <div class="item-price">
+        <span id="sell-item-price">$100</span> per unit
+    </div>
+</div>
+</div>
+
+<div class="sell-controls">
+<div class="quantity-control">
+    <button id="decrease-amount" class="quantity-btn">
+        <i class="fas fa-minus"></i>
+    </button>
+    <input type="number" id="sell-amount" min="1" value="1" class="quantity-input">
+    <button id="increase-amount" class="quantity-btn">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+<div class="quantity-slider">
+    <input type="range" id="amount-slider" min="1" max="10" value="1" class="slider">
+</div>
+</div>
+
+<div class="sell-summary">
+<div class="summary-row">
+    <span>Quantity:</span>
+    <span id="summary-quantity">1</span>
+</div>
+<div class="summary-row">
+    <span>Unit Price:</span>
+    <span id="summary-unit-price">$100</span>
+</div>
+<div class="summary-row total">
+    <span>Total:</span>
+    <span id="sell-total-price">$100</span>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button id="confirm-sell" class="btn-primary">
+<i class="fas fa-check"></i> Confirm Sale
+</button>
+<button id="cancel-sell" class="btn-secondary">
+<i class="fas fa-times"></i> Cancel
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
