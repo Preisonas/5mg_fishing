@@ -17,4 +17,4 @@ ox_lib
 ox_target/qtarget/qb-target
 
 Preview: https://youtu.be/20YFOu15D0o
-Discord: discord.gg/25WRkWfknb
+Discord: [discord.gg/25WRkWfknb](https://discord.gg/nzEvK98UzC)
